@@ -13,10 +13,18 @@ package:
     - ./bin/**
 
 functions:
-  indexcountapi:
+  shield:
     handler: bin/shields
     events:
       - http: GET shield
+  shieldsave:
+    handler: bin/shieldsave
+    events:
+      - http:
+          path: POST shield
+          method: post
+          private: true
+
 
 custom:
   stages:
@@ -28,6 +36,8 @@ provider:
   runtime: go1.x
   region: us-west-2
   stage: ${opt:stage,'dev'}
+  apiKeys:
+    - ${opt:stage}-shieldwrite
   apiGateway:
     binaryMediaTypes:
       - '*/*'
