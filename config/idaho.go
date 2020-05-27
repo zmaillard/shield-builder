@@ -8,7 +8,7 @@ type Idaho struct {
 
 
 func (i Idaho) Color() Color {
-	return Color{Blue: 255, Green: 255, Red: 255}
+	return Color{Blue: 0, Green: 0, Red: 0}
 }
 
 func (i Idaho) Prefix() string {
@@ -32,35 +32,37 @@ func (i Idaho) Match(pattern string) (SignTemplate, bool) {
 	}
 
 
-	var rightAlign = 225.0
+
 	if twoDigitShield {
+		var rightAlign = 580.0
 		return SignTemplate{
 			Template: "Idaho.png",
 			TextBlocks: []TextBlock{
 				{
-					MaxWidth:     150,
-					DefaultFont:  C,
-					OversizeFont: B,
+					MaxWidth:     300,
+					DefaultFont:  D,
+					OversizeFont: C,
 					Text:         tokens[1],
 					Color:        i.Color(),
-					FontSize:     155,
-					Y:            125,
+					FontSize:     375,
+					Y:            280,
 					Right:        &rightAlign,
 				},
 			},
 		}, true
 	} else {
+		var rightAlign = 745.0
 		return SignTemplate{
-			Template: "Idaho.png",
+			Template: "Idaho3di.png",
 			TextBlocks: []TextBlock{
 				{
-					MaxWidth:     200,
-					DefaultFont:  B,
+					MaxWidth:     600,
+					DefaultFont:  C,
 					OversizeFont: B,
 					Text:         tokens[1],
 					Color:        i.Color(),
-					FontSize:     130,
-					Y:            110,
+					FontSize:     370,
+					Y:            280,
 					Right:        &rightAlign,
 				},
 			},
