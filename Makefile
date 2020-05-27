@@ -15,7 +15,8 @@ gomodgen:
 
 build: gomodgen
 	export GO111MODULE=on
-	env GOOS=linux go build -ldflags="-s -w" -o bin/shields main.go rice-box.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/shields viewmain.go rice-box.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/shieldsave savemain.go rice-box.go
 
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
