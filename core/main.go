@@ -8,6 +8,7 @@ import (
 	"sign-builder/config"
 )
 
+
 func Build(pattern string) (*image.Image, error) {
 	template, err := config.LoadSignTemplate(pattern)
 

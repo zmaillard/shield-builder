@@ -21,7 +21,7 @@ functions:
     handler: bin/shieldsave
     events:
       - http:
-          path: POST shield
+          path: shield
           method: post
           private: true
 
@@ -30,14 +30,21 @@ custom:
   stages:
     - dev
     - prod
+  shieldBucket:
+    prod: highwayshield
+    dev: highwayshielddev
 
 provider:
   name: aws
   runtime: go1.x
   region: us-west-2
   stage: ${opt:stage,'dev'}
+  iamManagedPolicies:
+    - 'arn:aws:iam::599549803512:policy/shield-save-bucket'
   apiKeys:
     - ${opt:stage}-shieldwrite
   apiGateway:
     binaryMediaTypes:
       - '*/*'
+  environment:
+    SHIELDBUCKET: ${self:custom.shieldBucket.${self:provider.stage}}
