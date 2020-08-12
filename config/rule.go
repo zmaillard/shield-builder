@@ -63,6 +63,7 @@ var stateSuffix = map[string]string{
 
 var shields = []Shield{
 	Arizona{},
+	BusinessLoop{},
 	California{},
 	Colorado{},
 	Idaho{},
