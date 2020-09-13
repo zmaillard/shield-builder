@@ -29,16 +29,11 @@ func (i Nebraska) Match(pattern string) (SignTemplate, bool) {
 	isLink := false
 	isSpur := false
 	linkSpurNumber := ""
-	linkSpurSuffix := ""
 	if len(suffixTokens) == 2 && strings.ToUpper(suffixTokens[1]) == "LINK" {
-		num := suffixTokens[0]
-		linkSpurNumber = num[:len(num)-1]
-		linkSpurSuffix = num[len(num)-1:]
+		linkSpurNumber = suffixTokens[0]
 		isLink = true
 	} else if len(suffixTokens) == 2 && strings.ToUpper(suffixTokens[1]) == "SPUR" {
-		num := suffixTokens[0]
-		linkSpurNumber = num[:len(num)-1]
-		linkSpurSuffix = num[len(num)-1:]
+		linkSpurNumber = suffixTokens[0]
 		isSpur = true
 	}
 
@@ -50,6 +45,7 @@ func (i Nebraska) Match(pattern string) (SignTemplate, bool) {
 
 	isNormal := !isLink && !isSpur
 
+	shrinkBy :=210.0
 
 	if twoDigitShield && isNormal {
 		return SignTemplate{
@@ -85,53 +81,35 @@ func (i Nebraska) Match(pattern string) (SignTemplate, bool) {
 		}, true
 	} else if isSpur {
 		return SignTemplate{
-			Template: "Nebraska3di.png",
+			Template: "NebraskaSpur.png",
 			TextBlocks: []TextBlock{
 				{
-					MaxWidth:     475,
-					DefaultFont:  D,
-					OversizeFont: C,
+					MaxWidth:     400,
+					DefaultFont:  C,
+					OversizeFont: B,
 					Text:         linkSpurNumber,
 					Color:        i.Color(),
-					FontSize:     215,
-					Y:            235,
+					FontSize:     280,
+					Y:            250,
 					Center:       250,
-				},
-				{
-					MaxWidth:     475,
-					DefaultFont:  D,
-					OversizeFont: C,
-					Text:         linkSpurSuffix,
-					Color:        i.Color(),
-					FontSize:     215,
-					Y:            235,
-					Center:       250,
+					ShrinkLastCharacterBy: &shrinkBy,
 				},
 			},
 		}, true
 	}else  { //link
 		return SignTemplate{
-			Template: "Nebraska3di.png",
+			Template: "NebraskaLink.png",
 			TextBlocks: []TextBlock{
 				{
-					MaxWidth:     475,
-					DefaultFont:  D,
-					OversizeFont: C,
+					MaxWidth:     400,
+					DefaultFont:  C,
+					OversizeFont: B,
 					Text:         linkSpurNumber,
 					Color:        i.Color(),
-					FontSize:     215,
-					Y:            235,
+					FontSize:     280,
+					Y:            250,
 					Center:       250,
-				},
-				{
-					MaxWidth:     475,
-					DefaultFont:  D,
-					OversizeFont: C,
-					Text:         linkSpurSuffix,
-					Color:        i.Color(),
-					FontSize:     215,
-					Y:            235,
-					Center:       250,
+					ShrinkLastCharacterBy: &shrinkBy,
 				},
 			},
 		}, true
