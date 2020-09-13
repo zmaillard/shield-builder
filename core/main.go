@@ -6,6 +6,7 @@ import (
 	"github.com/golang/freetype/truetype"
 	"image"
 	"sign-builder/config"
+	gofont "golang.org/x/image/font"
 )
 
 
@@ -37,8 +38,25 @@ func Build(pattern string) (*image.Image, error) {
 		textBlock.SetColor(ctx.SetRGBA255)
 
 		ctx.SetFontFace(face)
-		fmt.Println(ctx.MeasureString(textBlock.Text))
 		w, _ := ctx.MeasureString(textBlock.Text)
+		var face2 gofont.Face
+		if textBlock.ShrinkLastCharacterBy != nil {
+			opts := truetype.Options{}
+
+			opts.Size = *textBlock.ShrinkLastCharacterBy
+			font, err := config.LoadFont(textBlock.DefaultFont)
+			if err != nil {
+				fmt.Println(err)
+				return nil , err
+			}
+			face2 = truetype.NewFace(font, &opts)
+			w1, _ := ctx.MeasureString(textBlock.Text[:len(textBlock.Text)-1])
+			ctx.SetFontFace(face2)
+			w2, _ := ctx.MeasureString(textBlock.Text[len(textBlock.Text)-1:])
+			w = w1 + w2
+			ctx.SetFontFace(face)
+		}
+
 		if w > float64(textBlock.MaxWidth) {
 			font, err := config.LoadFont(textBlock.OversizeFont)
 			if err != nil {
@@ -47,9 +65,25 @@ func Build(pattern string) (*image.Image, error) {
 			face := truetype.NewFace(font, &opts)
 			ctx.SetFontFace(face)
 			w, _ = ctx.MeasureString(textBlock.Text)
+			if textBlock.ShrinkLastCharacterBy != nil {
+				w1, _ := ctx.MeasureString(textBlock.Text[:len(textBlock.Text)-1])
+				ctx.SetFontFace(face2)
+				w2, _ := ctx.MeasureString(textBlock.Text[len(textBlock.Text)-1:])
+				w = w1 + w2
+				ctx.SetFontFace(face)
+			}
 		}
 		newX := textBlock.Position(w)
-		ctx.DrawString(textBlock.Text, newX, float64(textBlock.Y))
+		if textBlock.ShrinkLastCharacterBy == nil {
+			ctx.DrawString(textBlock.Text, newX, float64(textBlock.Y))
+		} else {
+			w1, _ := ctx.MeasureString(textBlock.Text[:len(textBlock.Text)-1])
+			ctx.DrawString(textBlock.Text[:len(textBlock.Text)-1], newX, float64(textBlock.Y))
+			ctx.SetFontFace(face2)
+			newX = newX + w1
+			ctx.DrawString(textBlock.Text[len(textBlock.Text)-1:], newX, float64(textBlock.Y))
+		}
+
 	}
 
 	img := ctx.Image()

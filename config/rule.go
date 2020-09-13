@@ -68,6 +68,7 @@ var shields = []Shield{
 	Colorado{},
 	Idaho{},
 	Interstate{},
+	Nebraska{},
 	Nevada{},
 	NewMexico{},
 	NorthDakota{},
@@ -110,15 +111,16 @@ type SignTemplate struct {
 }
 
 type TextBlock struct {
-	MaxWidth     int
-	DefaultFont  RoadgeekFont
-	OversizeFont RoadgeekFont
-	Text         string
-	FontSize     float64
-	Color        Color
-	Y            int
-	Center       float64
-	Right        *float64
+	MaxWidth            int
+	DefaultFont         RoadgeekFont
+	OversizeFont        RoadgeekFont
+	Text                string
+	FontSize            float64
+	Color               Color
+	Y                   int
+	Center              float64
+	Right               *float64
+	ShrinkLastCharacterBy *float64
 }
 
 func (t TextBlock) SetColor(c func(int, int, int, int)) {
