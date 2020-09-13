@@ -23,7 +23,7 @@ jobs:
       - run: npm install
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'      
 
-      - run: npm install serverless
+      - run: npm install serverless@1.70.1
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'      
 
       - run: npx serverless deploy -s prod
