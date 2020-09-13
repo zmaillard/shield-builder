@@ -68,6 +68,7 @@ var shields = []Shield{
 	Colorado{},
 	Idaho{},
 	Interstate{},
+	Nebraska{},
 	Nevada{},
 	NewMexico{},
 	NorthDakota{},
