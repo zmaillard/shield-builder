@@ -9,10 +9,12 @@ import (
 )
 
 var stateSuffix = map[string]string{
+	"AB": "Alberta",
 	"AL": "Alabama",
 	"AK": "Alaska",
 	"AZ": "Arizona",
 	"AR": "Arkansas",
+	"BC": "British Columbia",
 	"CA": "California",
 	"CO": "Colorado",
 	"CT": "Connecticut",
@@ -62,6 +64,7 @@ var stateSuffix = map[string]string{
 }
 
 var shields = []Shield{
+	Alberta{},
 	Arizona{},
 	BusinessLoop{},
 	California{},
