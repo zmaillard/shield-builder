@@ -30,6 +30,7 @@ func (i Colorado) Match(pattern string) (SignTemplate, bool) {
 	suffixTokens := strings.Split(tokens[1], "_")
 
 		return SignTemplate{
+			Template: "Colorado.png",
 			TextBlocks: []TextBlock{
 				{
 					MaxWidth:     340,
