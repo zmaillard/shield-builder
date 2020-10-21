@@ -28,12 +28,22 @@ func (i Utah) Match(pattern string) (SignTemplate, bool) {
 
 	// Number
 	twoDigitShield := true
-	if len(tokens[1]) > 2 {
+
+
+	suffixTokens := strings.Split(tokens[1], "_")
+	isGuide := false
+	number := tokens[1]
+	if len(suffixTokens) == 2 && strings.ToUpper(suffixTokens[1]) == "GUIDE" {
+		isGuide = true
+		number = suffixTokens[0]
+	}
+
+	if len(number) > 2 {
 		twoDigitShield = false
 	}
 
 	// Two digit shield without state
-	if twoDigitShield {
+	if twoDigitShield && !isGuide {
 		return SignTemplate{
 			Template: "Utah.png",
 			TextBlocks: []TextBlock{
@@ -41,7 +51,7 @@ func (i Utah) Match(pattern string) (SignTemplate, bool) {
 					MaxWidth:     240,
 					DefaultFont:  D,
 					OversizeFont: C,
-					Text:         tokens[1],
+					Text:         number,
 					Color:        i.Color(),
 					FontSize:     192.5,
 					Y:            250,
@@ -49,7 +59,7 @@ func (i Utah) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
-	} else  {
+	} else if !twoDigitShield && !isGuide  {
 		return SignTemplate{
 			Template: "Utah.png",
 			TextBlocks: []TextBlock{
@@ -57,11 +67,43 @@ func (i Utah) Match(pattern string) (SignTemplate, bool) {
 					MaxWidth:     240,
 					DefaultFont:  C,
 					OversizeFont: B,
-					Text:         tokens[1],
+					Text:         number,
 					Color:        i.Color(),
 					FontSize:     160,
 					Y:            250,
 					Center:       195.35,
+				},
+			},
+		}, true
+	} else if twoDigitShield && isGuide  {
+		return SignTemplate{
+			Template: "UtahGuide.png",
+			TextBlocks: []TextBlock{
+				{
+					MaxWidth:     400,
+					DefaultFont:  D,
+					OversizeFont: C,
+					Text:         number,
+					Color:        i.Color(),
+					FontSize:     305,
+					Y:            380,
+					Center:       280,
+				},
+			},
+		}, true
+	} else {
+		return SignTemplate{
+			Template: "UtahGuide3di.png",
+			TextBlocks: []TextBlock{
+				{
+					MaxWidth:     450,
+					DefaultFont:  C,
+					OversizeFont: B,
+					Text:         number,
+					Color:        i.Color(),
+					FontSize:     300,
+					Y:            385,
+					Center:       335,
 				},
 			},
 		}, true
