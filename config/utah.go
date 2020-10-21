@@ -75,30 +75,14 @@ func (i Utah) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
-	} else if twoDigitShield && isGuide  {
+	} else {
 		return SignTemplate{
 			Template: "UtahGuide.png",
 			TextBlocks: []TextBlock{
 				{
-					MaxWidth:     400,
+					MaxWidth:     450,
 					DefaultFont:  D,
 					OversizeFont: C,
-					Text:         number,
-					Color:        i.Color(),
-					FontSize:     305,
-					Y:            380,
-					Center:       280,
-				},
-			},
-		}, true
-	} else {
-		return SignTemplate{
-			Template: "UtahGuide3di.png",
-			TextBlocks: []TextBlock{
-				{
-					MaxWidth:     450,
-					DefaultFont:  C,
-					OversizeFont: B,
 					Text:         number,
 					Color:        i.Color(),
 					FontSize:     300,
