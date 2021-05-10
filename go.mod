@@ -3,7 +3,7 @@ module sign-builder
 go 1.13
 
 require (
-	github.com/GeertJohan/go.rice v1.0.0
+	github.com/GeertJohan/go.rice v1.0.2
 	github.com/aws/aws-lambda-go v1.17.0
 	github.com/aws/aws-sdk-go v1.31.4
 	github.com/caarlos0/env v3.5.0+incompatible
