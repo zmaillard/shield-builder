@@ -27,10 +27,7 @@ func (i Wyoming) Match(pattern string) (SignTemplate, bool) {
 
 	// Check Suffix
 	suffixTokens := strings.Split(tokens[1], "_")
-	/*
-	isGuide = false
-
-
+	isGuide := false
 
 	if len(suffixTokens) == 2 {
 		if strings.ToUpper(suffixTokens[1]) == "GUIDE" {
@@ -38,16 +35,47 @@ func (i Wyoming) Match(pattern string) (SignTemplate, bool) {
 		}
 	}
 
-	 */
-
 	// Number
 	twoDigitShield := true
 	if len(suffixTokens[0]) > 2 {
 		twoDigitShield = false
 	}
-
-	// Two digit shield without state
-	if twoDigitShield {
+	if isGuide && twoDigitShield {
+		// Two digit Guide shield
+		return SignTemplate{
+			Template: "WyomingGuide.png",
+			TextBlocks: []TextBlock{
+				{
+					MaxWidth:     380,
+					DefaultFont:  D,
+					OversizeFont: C,
+					Text:         suffixTokens[0],
+					Color:        i.Color(),
+					FontSize:     275,
+					Y:            330,
+					Center:       197,
+				},
+			},
+		}, true
+	} else if isGuide && !twoDigitShield {
+		// Three digit Guide shield
+		return SignTemplate{
+			Template: "WyomingGuide3di.png",
+			TextBlocks: []TextBlock{
+				{
+					MaxWidth:     385,
+					DefaultFont:  C,
+					OversizeFont: B,
+					Text:         suffixTokens[0],
+					Color:        i.Color(),
+					FontSize:     273,
+					Y:            340,
+					Center:       256,
+				},
+			},
+		}, true
+	} else if twoDigitShield {
+		// Two digit shield without state
 		return SignTemplate{
 			Template: "Wyoming.png",
 			TextBlocks: []TextBlock{
