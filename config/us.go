@@ -28,11 +28,14 @@ func (i US) Match(pattern string) (SignTemplate, bool) {
 	}
 
 	var isCalifornia = false
+	var isGuide = false
 	// Check Suffix
 	suffixTokens := strings.Split(tokens[1], "_")
 	if len(suffixTokens) == 2 {
 		if suffixTokens[1] == i.CaliforniaSuffix() {
 			isCalifornia = true
+		} else if strings.ToUpper(suffixTokens[1]) == "GUIDE" {
+			isGuide = true
 		}
 
 	}
@@ -45,8 +48,12 @@ func (i US) Match(pattern string) (SignTemplate, bool) {
 
 	// Two digit shield without state
 	if twoDigitShield && !isCalifornia {
+		template := "US.png"
+		if isGuide {
+			template = "USGuide.png"
+		}
 		return SignTemplate{
-			Template: "US.png",
+			Template: template,
 			TextBlocks: []TextBlock{
 				{
 					MaxWidth:     550,
@@ -78,8 +85,12 @@ func (i US) Match(pattern string) (SignTemplate, bool) {
 			},
 		}, true
 	} else if !twoDigitShield && !isCalifornia {
+		template := "US3di.png"
+		if isGuide {
+			template = "US3diGuide.png"
+		}
 		return SignTemplate{
-			Template: "US3di.png",
+			Template: template,
 			TextBlocks: []TextBlock{
 				{
 					MaxWidth:     660,
