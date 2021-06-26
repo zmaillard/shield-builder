@@ -74,6 +74,8 @@ var shields = []Shield{
 	Iowa{},
 	Kansas{},
 	Minnesota{},
+	Montana{},
+	MontanaSecondary{},
 	Nebraska{},
 	Nevada{},
 	NewMexico{},

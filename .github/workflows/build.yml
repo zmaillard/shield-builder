@@ -3,10 +3,10 @@ name: Serverless Deploy
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -21,13 +21,13 @@ jobs:
       - run: make build
       
       - run: npm install
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'      
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
       - run: npm install serverless@1.70.1
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'      
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
       - run: npx serverless deploy -s prod
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'      
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
