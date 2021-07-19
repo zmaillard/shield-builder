@@ -25,7 +25,31 @@ func (i Nevada) Match(pattern string) (SignTemplate, bool) {
 		return SignTemplate{}, false
 	}
 
+	suffixTokens := strings.Split(tokens[1], "_")
+	isGuide := false
+	number := tokens[1]
+	if len(suffixTokens) == 2 && strings.ToUpper(suffixTokens[1]) == "GUIDE" {
+		isGuide = true
+		number = suffixTokens[0]
+	}
 
+	if isGuide {
+		return SignTemplate{
+			Template: "Nevada_Guide.png",
+			TextBlocks: []TextBlock{
+				{
+					MaxWidth:     775,
+					DefaultFont:  C,
+					OversizeFont: B,
+					Text:         number,
+					Color:        i.Color(),
+					FontSize:     440,
+					Y:            380,
+					Center:       470,
+				},
+			},
+		}, true
+	} else {
 		return SignTemplate{
 			Template: "Nevada.png",
 			TextBlocks: []TextBlock{
@@ -33,7 +57,7 @@ func (i Nevada) Match(pattern string) (SignTemplate, bool) {
 					MaxWidth:     380,
 					DefaultFont:  D,
 					OversizeFont: C,
-					Text:         tokens[1],
+					Text:         number,
 					Color:        i.Color(),
 					FontSize:     250,
 					Y:            230,
@@ -41,4 +65,7 @@ func (i Nevada) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
+	}
+
+
 }
