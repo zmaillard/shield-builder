@@ -119,15 +119,15 @@ type SignTemplate struct {
 }
 
 type TextBlock struct {
-	MaxWidth            int
-	DefaultFont         RoadgeekFont
-	OversizeFont        RoadgeekFont
-	Text                string
-	FontSize            float64
-	Color               Color
-	Y                   int
-	Center              float64
-	Right               *float64
+	MaxWidth              int
+	DefaultFont           RoadgeekFont
+	OversizeFont          RoadgeekFont
+	Text                  string
+	FontSize              float64
+	Color                 Color
+	Y                     int
+	Center                float64
+	Right                 *float64
 	ShrinkLastCharacterBy *float64
 }
 

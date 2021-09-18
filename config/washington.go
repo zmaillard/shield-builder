@@ -3,9 +3,7 @@ package config
 import "strings"
 
 type Washington struct {
-
 }
-
 
 func (i Washington) Color() Color {
 	return Color{Blue: 0, Green: 0, Red: 0}
@@ -24,7 +22,6 @@ func (i Washington) Match(pattern string) (SignTemplate, bool) {
 	if strings.ToUpper(tokens[0]) != i.Prefix() {
 		return SignTemplate{}, false
 	}
-
 
 	// Number
 	twoDigitShield := true
@@ -49,7 +46,7 @@ func (i Washington) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
-	} else  {
+	} else {
 		return SignTemplate{
 			Template: "Washington.png",
 			TextBlocks: []TextBlock{

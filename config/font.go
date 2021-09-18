@@ -9,7 +9,6 @@ import (
 
 type RoadgeekFont int
 
-
 const (
 	B RoadgeekFont = iota
 	C RoadgeekFont = iota
@@ -32,7 +31,7 @@ func (f RoadgeekFont) String() string {
 	}
 }
 
-func LoadFont (f RoadgeekFont) (*truetype.Font, error) {
+func LoadFont(f RoadgeekFont) (*truetype.Font, error) {
 
 	box := rice.MustFindBox("fonts")
 

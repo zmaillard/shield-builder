@@ -49,4 +49,3 @@ func (i BusinessLoop) Match(pattern string) (SignTemplate, bool) {
 
 	return SignTemplate{}, false
 }
-

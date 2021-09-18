@@ -3,9 +3,7 @@ package config
 import "strings"
 
 type Utah struct {
-
 }
-
 
 func (i Utah) Color() Color {
 	return Color{Blue: 0, Green: 0, Red: 0}
@@ -25,10 +23,8 @@ func (i Utah) Match(pattern string) (SignTemplate, bool) {
 		return SignTemplate{}, false
 	}
 
-
 	// Number
 	twoDigitShield := true
-
 
 	suffixTokens := strings.Split(tokens[1], "_")
 	isGuide := false
@@ -59,7 +55,7 @@ func (i Utah) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
-	} else if !twoDigitShield && !isGuide  {
+	} else if !twoDigitShield && !isGuide {
 		return SignTemplate{
 			Template: "Utah.png",
 			TextBlocks: []TextBlock{

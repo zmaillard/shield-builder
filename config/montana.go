@@ -2,9 +2,7 @@ package config
 
 import "strings"
 
-
 type Montana struct {
-
 }
 
 func (i Montana) Color() Color {
@@ -25,10 +23,8 @@ func (i Montana) Match(pattern string) (SignTemplate, bool) {
 		return SignTemplate{}, false
 	}
 
-
 	// Number
 	twoDigitShield := true
-
 
 	suffixTokens := strings.Split(tokens[1], "_")
 	isGuide := false
@@ -58,7 +54,7 @@ func (i Montana) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
-	} else if !twoDigitShield && !isGuide  {
+	} else if !twoDigitShield && !isGuide {
 		return SignTemplate{
 			Template: "Montana3di.png",
 			TextBlocks: []TextBlock{
@@ -74,7 +70,7 @@ func (i Montana) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
-	} else 	if twoDigitShield && isGuide {
+	} else if twoDigitShield && isGuide {
 		return SignTemplate{
 			Template: "MontanaGuide.png",
 			TextBlocks: []TextBlock{

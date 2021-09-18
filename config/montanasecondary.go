@@ -2,9 +2,7 @@ package config
 
 import "strings"
 
-
 type MontanaSecondary struct {
-
 }
 
 func (i MontanaSecondary) Color() Color {
@@ -24,7 +22,6 @@ func (i MontanaSecondary) Match(pattern string) (SignTemplate, bool) {
 	if strings.ToUpper(tokens[0]) != i.Prefix() {
 		return SignTemplate{}, false
 	}
-
 
 	suffixTokens := strings.Split(tokens[1], "_")
 	isGuide := false
@@ -50,7 +47,7 @@ func (i MontanaSecondary) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
-	} else   {
+	} else {
 		return SignTemplate{
 			Template: "MontanaSecondaryGuide.png",
 			TextBlocks: []TextBlock{

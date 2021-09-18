@@ -4,7 +4,6 @@ import (
 	"strings"
 )
 
-
 func getNorthDakotaShieldWidth(number string) ShieldWidth {
 	switch len(number) {
 	case 1:
@@ -21,6 +20,7 @@ func getNorthDakotaShieldWidth(number string) ShieldWidth {
 
 	return TwoDigit
 }
+
 type NorthDakota struct {
 }
 
@@ -61,7 +61,7 @@ func (i NorthDakota) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
-	} else if shieldWidth== ThreeDigit  {
+	} else if shieldWidth == ThreeDigit {
 		return SignTemplate{
 			Template: "NorthDakota3di.png",
 			TextBlocks: []TextBlock{

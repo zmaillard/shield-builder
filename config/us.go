@@ -124,4 +124,3 @@ func (i US) Match(pattern string) (SignTemplate, bool) {
 
 	return SignTemplate{}, false
 }
-

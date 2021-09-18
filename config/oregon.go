@@ -23,7 +23,6 @@ func (i Oregon) Match(pattern string) (SignTemplate, bool) {
 		return SignTemplate{}, false
 	}
 
-
 	// Number
 	twoDigitShield := true
 	if len(tokens[1]) > 2 {
@@ -47,7 +46,7 @@ func (i Oregon) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
-	} else  {
+	} else {
 		return SignTemplate{
 			Template: "Oregon3di.png",
 			TextBlocks: []TextBlock{

@@ -39,10 +39,10 @@ func UploadS3(key string, path string) error {
 
 	if err != nil {
 		log.WithFields(log.Fields{
-			"error": err,
+			"error":  err,
 			"bucket": cfg.Bucket,
-			"key": key,
-			"path": path,
+			"key":    key,
+			"path":   path,
 		}).Error("Unable To Upload File To S3")
 		return err
 	}

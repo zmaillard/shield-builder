@@ -3,9 +3,7 @@ package config
 import "strings"
 
 type Idaho struct {
-
 }
-
 
 func (i Idaho) Color() Color {
 	return Color{Blue: 0, Green: 0, Red: 0}
@@ -30,8 +28,6 @@ func (i Idaho) Match(pattern string) (SignTemplate, bool) {
 	if len(tokens[1]) > 2 {
 		twoDigitShield = false
 	}
-
-
 
 	if twoDigitShield {
 		var rightAlign = 580.0
