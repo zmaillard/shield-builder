@@ -11,5 +11,6 @@ build:
 	export GO111MODULE=on
 	env GOOS=linux go build -ldflags="-s -w" -o ./azure-function/main main.go rice-box.go
 
+default: build
 
-.PHONY: build clean
+.PHONY: build clean default buildfn
