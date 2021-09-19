@@ -1,13 +1,13 @@
 package core
 
 import (
-"github.com/caarlos0/env"
-"github.com/joho/godotenv"
-log "github.com/sirupsen/logrus"
+	"github.com/caarlos0/env"
+	"github.com/joho/godotenv"
+	log "github.com/sirupsen/logrus"
 )
 
 type Settings struct {
-	Bucket            string `env:"SHIELDBUCKET"`
+	Bucket string `env:"ShieldBucket"`
 }
 
 var settings *Settings
@@ -32,4 +32,3 @@ func Init() {
 func GetConfig() *Settings {
 	return settings
 }
-

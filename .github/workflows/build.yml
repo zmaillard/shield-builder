@@ -1,34 +1,17 @@
-name: Serverless Deploy
+name: Build Shield Builder
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [pull_request]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+
+      - name: "checkout github action"
+        uses: actions/checkout@v2.3.4
 
       - uses: actions/setup-go@v2
         with:
           go-version: '^1.13.4'
 
-      - run: make build
-      
-      - run: npm install
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-
-      - run: npm install serverless@1.70.1
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-
-      - run: npx serverless deploy -s prod
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
+      - run: make default

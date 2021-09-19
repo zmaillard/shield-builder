@@ -3,7 +3,6 @@ package config
 import "strings"
 
 type Wyoming struct {
-
 }
 
 func (i Wyoming) Color() Color {
@@ -23,7 +22,6 @@ func (i Wyoming) Match(pattern string) (SignTemplate, bool) {
 	if strings.ToUpper(tokens[0]) != i.Prefix() {
 		return SignTemplate{}, false
 	}
-
 
 	// Check Suffix
 	suffixTokens := strings.Split(tokens[1], "_")
@@ -91,7 +89,7 @@ func (i Wyoming) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
-	} else  {
+	} else {
 		return SignTemplate{
 			Template: "Wyoming.png",
 			TextBlocks: []TextBlock{

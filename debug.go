@@ -11,7 +11,7 @@ import (
 	"sign-builder/config"
 )
 
-func main(){
+func main() {
 	//Make sure fonts are available when script is loaded
 	_ = rice.MustFindBox("fonts")
 
@@ -95,7 +95,6 @@ func main(){
 		}
 
 	}
-
 
 	f, err := os.Create("/tmp/" + pattern + ".png")
 	if err != nil {

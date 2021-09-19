@@ -28,9 +28,9 @@ func (i Arizona) Match(pattern string) (SignTemplate, bool) {
 	}
 
 	hasLoop := false
-	if strings.Index(tokens[1],i.LoopSuffix()) >= 0 {
+	if strings.Index(tokens[1], i.LoopSuffix()) >= 0 {
 		hasLoop = true
-		tokens[1] = strings.ReplaceAll(tokens[1],i.LoopSuffix(),"")
+		tokens[1] = strings.ReplaceAll(tokens[1], i.LoopSuffix(), "")
 	}
 
 	// Number

@@ -2,6 +2,7 @@ package core
 
 import (
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	log "github.com/sirupsen/logrus"
@@ -12,6 +13,7 @@ func UploadS3(key string, path string) error {
 	cfg := GetConfig()
 	session, err := session.NewSession(&aws.Config{
 		Region: aws.String("us-west-2"),
+		Credentials: credentials.NewEnvCredentials(),
 	})
 
 	log.WithFields(log.Fields{
@@ -39,10 +41,10 @@ func UploadS3(key string, path string) error {
 
 	if err != nil {
 		log.WithFields(log.Fields{
-			"error": err,
+			"error":  err,
 			"bucket": cfg.Bucket,
-			"key": key,
-			"path": path,
+			"key":    key,
+			"path":   path,
 		}).Error("Unable To Upload File To S3")
 		return err
 	}

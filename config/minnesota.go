@@ -3,9 +3,7 @@ package config
 import "strings"
 
 type Minnesota struct {
-
 }
-
 
 func (i Minnesota) Color() Color {
 	return Color{Blue: 255, Green: 255, Red: 255}
@@ -51,7 +49,7 @@ func (i Minnesota) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
-	} else  {
+	} else {
 		return SignTemplate{
 			Template: "Minnesota3di.png",
 			TextBlocks: []TextBlock{

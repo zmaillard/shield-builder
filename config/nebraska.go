@@ -3,9 +3,7 @@ package config
 import "strings"
 
 type Nebraska struct {
-
 }
-
 
 func (i Nebraska) Color() Color {
 	return Color{Blue: 0, Green: 0, Red: 0}
@@ -45,7 +43,7 @@ func (i Nebraska) Match(pattern string) (SignTemplate, bool) {
 
 	isNormal := !isLink && !isSpur
 
-	shrinkBy :=210.0
+	shrinkBy := 210.0
 
 	if twoDigitShield && isNormal {
 		return SignTemplate{
@@ -84,31 +82,31 @@ func (i Nebraska) Match(pattern string) (SignTemplate, bool) {
 			Template: "NebraskaSpur.png",
 			TextBlocks: []TextBlock{
 				{
-					MaxWidth:     400,
-					DefaultFont:  C,
-					OversizeFont: B,
-					Text:         linkSpurNumber,
-					Color:        i.Color(),
-					FontSize:     280,
-					Y:            250,
-					Center:       250,
+					MaxWidth:              400,
+					DefaultFont:           C,
+					OversizeFont:          B,
+					Text:                  linkSpurNumber,
+					Color:                 i.Color(),
+					FontSize:              280,
+					Y:                     250,
+					Center:                250,
 					ShrinkLastCharacterBy: &shrinkBy,
 				},
 			},
 		}, true
-	}else  { //link
+	} else { //link
 		return SignTemplate{
 			Template: "NebraskaLink.png",
 			TextBlocks: []TextBlock{
 				{
-					MaxWidth:     400,
-					DefaultFont:  C,
-					OversizeFont: B,
-					Text:         linkSpurNumber,
-					Color:        i.Color(),
-					FontSize:     280,
-					Y:            250,
-					Center:       250,
+					MaxWidth:              400,
+					DefaultFont:           C,
+					OversizeFont:          B,
+					Text:                  linkSpurNumber,
+					Color:                 i.Color(),
+					FontSize:              280,
+					Y:                     250,
+					Center:                250,
 					ShrinkLastCharacterBy: &shrinkBy,
 				},
 			},

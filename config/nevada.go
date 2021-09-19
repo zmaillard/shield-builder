@@ -3,9 +3,7 @@ package config
 import "strings"
 
 type Nevada struct {
-
 }
-
 
 func (i Nevada) Color() Color {
 	return Color{Blue: 0, Green: 0, Red: 0}
@@ -66,6 +64,5 @@ func (i Nevada) Match(pattern string) (SignTemplate, bool) {
 			},
 		}, true
 	}
-
 
 }

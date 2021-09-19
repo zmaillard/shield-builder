@@ -17,11 +17,11 @@ func (i Alberta) CrowsnestColor() Color {
 }
 
 func (i Alberta) IsSecondary(route int) bool {
-	return route >= 500;
+	return route >= 500
 }
 
 func (i Alberta) IsCrowsNest(route int) bool {
-	return route == 3;
+	return route == 3
 }
 
 func (i Alberta) Prefix() string {
@@ -41,15 +41,15 @@ func (i Alberta) Match(pattern string) (SignTemplate, bool) {
 	numberIndex := 0
 	route := tokens[1]
 	for i := len(route) - 1; i >= 0; i-- {
-		_, err := strconv.Atoi(route[0:i+1])
+		_, err := strconv.Atoi(route[0 : i+1])
 
 		if err == nil {
 			numberIndex = i
-			break;
+			break
 		}
 	}
 
-	routeNumber,_ := strconv.Atoi(route[0:numberIndex+1])
+	routeNumber, _ := strconv.Atoi(route[0 : numberIndex+1])
 	isCrowsnest := i.IsCrowsNest(routeNumber)
 	isSecondary := i.IsSecondary(routeNumber)
 

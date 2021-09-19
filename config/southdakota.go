@@ -28,6 +28,7 @@ func getShieldWidth(number string) ShieldWidth {
 
 	return TwoDigit
 }
+
 type SouthDakota struct {
 }
 
@@ -68,7 +69,7 @@ func (i SouthDakota) Match(pattern string) (SignTemplate, bool) {
 				},
 			},
 		}, true
-	} else if shieldWidth== ThreeDigit  {
+	} else if shieldWidth == ThreeDigit {
 		return SignTemplate{
 			Template: "SouthDakota3di.png",
 			TextBlocks: []TextBlock{
