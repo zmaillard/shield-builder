@@ -1,6 +1,7 @@
 package main
 
 import (
+	rice "github.com/GeertJohan/go.rice"
 	"log"
 	"net/http"
 	"os"
@@ -10,6 +11,10 @@ import (
 
 func main() {
 	core.Init()
+	//Make sure fonts are available when script is loaded
+	_ = rice.MustFindBox("fonts")
+	_ = rice.MustFindBox("templates")
+
 	listenAddr := ":8080"
 	if val, ok := os.LookupEnv("FUNCTIONS_CUSTOMHANDLER_PORT"); ok {
 		listenAddr = ":" + val

@@ -6,16 +6,9 @@ import (
 	"image/png"
 	"net/http"
 	"sign-builder/core"
-
-	"github.com/GeertJohan/go.rice"
 )
 
 func HandleShieldQuery(w http.ResponseWriter, r *http.Request) {
-	//Make sure fonts are available when script is loaded
-	_ = rice.MustFindBox("fonts")
-
-	_ = rice.MustFindBox("templates")
-
 	params := r.URL.Query()
 	pattern, ok := params["shield"]
 	if !ok || len(pattern) == 0 {

@@ -6,19 +6,12 @@ import (
 	"net/http"
 	"path"
 	"sign-builder/core"
-
-	"github.com/GeertJohan/go.rice"
 )
 
 var largeHeight = 50
 var smallHeight = 20
 
 func HandleShieldPostQuery(w http.ResponseWriter, r *http.Request) {
-	//Make sure fonts are available when script is loaded
-	_ = rice.MustFindBox("fonts")
-
-	_ = rice.MustFindBox("templates")
-
 	params := r.URL.Query()
 	patterns, ok := params["shield"]
 	if !ok || len(patterns) == 0 {
