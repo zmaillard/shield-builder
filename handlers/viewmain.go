@@ -3,7 +3,6 @@ package handlers
 import (
 	"bytes"
 	"fmt"
-	log "github.com/sirupsen/logrus"
 	"image/png"
 	"net/http"
 	"sign-builder/core"
