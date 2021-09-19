@@ -50,6 +50,27 @@ jobs:
 
   deploy-dev:
     runs-on: ubuntu-latest
+    environment: dev
+    needs: build
+    steps:
+      - uses: azure/login@v1.3.0
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: output
+
+      - name: "Dev environment deploy using azure functions action"
+        uses: azure/functions-action@v1.4.0
+        id: fa
+        with:
+          app-name: "RSP-FN-Dev-ShieldBuilder"
+          package: "."
+
+  deploy-prod:
+    runs-on: ubuntu-latest
+    environment: prod
     needs: build
     steps:
       - uses: azure/login@v1.3.0
