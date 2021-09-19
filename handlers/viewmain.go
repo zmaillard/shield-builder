@@ -17,6 +17,7 @@ func HandleShieldQuery(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Println(pattern[0])
 	img, err := core.Build(pattern[0])
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -30,4 +31,5 @@ func HandleShieldQuery(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(200)
 	w.Header().Set("Content-type", "image/png")
 	w.Write(buff.Bytes())
+	return
 }

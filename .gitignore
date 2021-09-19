@@ -27,3 +27,4 @@ node_modules
 .DS_Store
 
 azure-function/main
+azure-function/local.settings.json
