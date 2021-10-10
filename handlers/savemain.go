@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/disintegration/imaging"
 	"net/http"
+	"os"
 	"path"
 	"sign-builder/core"
 )
@@ -29,7 +30,7 @@ func HandleShieldPostQuery(w http.ResponseWriter, r *http.Request) {
 	}
 
 	smallImage := imaging.Resize(*img, 0, smallHeight, imaging.Linear)
-	smallFileName := path.Join("/tmp", pattern+".png")
+	smallFileName := path.Join(os.TempDir(), pattern+".png")
 	smallKey := path.Join("Shields", "20x", pattern+".png")
 	err = imaging.Save(smallImage, smallFileName)
 	if err != nil {
@@ -46,7 +47,7 @@ func HandleShieldPostQuery(w http.ResponseWriter, r *http.Request) {
 	}
 
 	largeImage := imaging.Resize(*img, 0, largeHeight, imaging.Linear)
-	largeFileName := path.Join("/tmp", pattern+".png")
+	largeFileName := path.Join(os.TempDir(), pattern+".png")
 	largeKey := path.Join("Shields", pattern+".png")
 	err = imaging.Save(largeImage, largeFileName)
 	if err != nil {

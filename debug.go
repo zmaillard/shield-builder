@@ -8,6 +8,7 @@ import (
 	gofont "golang.org/x/image/font"
 	"image/png"
 	"os"
+	"path"
 	"sign-builder/config"
 )
 
@@ -96,7 +97,7 @@ func main() {
 
 	}
 
-	f, err := os.Create("/tmp/" + pattern + ".png")
+	f, err := os.Create(path.Join(os.TempDir(),  pattern + ".png"))
 	if err != nil {
 		return
 	}
