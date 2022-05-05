@@ -2,34 +2,32 @@ package handlers
 
 import (
 	"bytes"
-	"fmt"
+	"github.com/gofiber/fiber/v2"
 	"image/png"
 	"net/http"
 	"sign-builder/core"
 )
 
-func HandleShieldQuery(w http.ResponseWriter, r *http.Request) {
-	params := r.URL.Query()
-	pattern, ok := params["shield"]
-	if !ok || len(pattern) == 0 {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintf(w, "Count Not Find Parameter Shield")
-		return
+func HandleShieldQuery(c *fiber.Ctx) error {
+	pattern := c.Query("shield")
+	if len(pattern) == 0 {
+		c.Status(http.StatusBadRequest)
+		c.WriteString("Count Not Find Parameter Shield")
+		return nil
 	}
 
-	fmt.Println(pattern[0])
-	img, err := core.Build(pattern[0])
+	img, err := core.Build(pattern)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintf(w, err.Error())
-		return
+		c.Status(http.StatusBadRequest)
+		c.WriteString("Count Not Build Shield")
+		return err
 	}
 
 	var buff bytes.Buffer
 	png.Encode(&buff, *img)
 
-	w.WriteHeader(200)
-	w.Header().Set("Content-type", "image/png")
-	w.Write(buff.Bytes())
-	return
+	c.Status(200)
+	c.Type("image/png")
+	c.Write(buff.Bytes())
+	return nil
 }

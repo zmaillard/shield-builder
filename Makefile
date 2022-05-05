@@ -1,16 +1,12 @@
 PROJECT_NAME ?= roadsign-shield-builder
+ENV ?= dev
+
+build:
+	go build -o ./bin/shield main.go
 
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
 
-buildfn:
-	export GO111MODULE=on
-	 GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o ./azure-function/main main.go rice-box.go
-
-build:
-	export GO111MODULE=on
-	env GOOS=linux go build -ldflags="-s -w" -o ./azure-function/main main.go rice-box.go
-
 default: build
 
-.PHONY: build clean default buildfn
+.PHONY: build clean default
