@@ -24,7 +24,7 @@ WORKDIR /
 
 COPY --from=build /main /main
 
-EXPOSE 8080
+EXPOSE 3000
 
 USER nonroot:nonroot
 
