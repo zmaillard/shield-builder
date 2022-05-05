@@ -2,9 +2,10 @@ package main
 
 import (
 	rice "github.com/GeertJohan/go.rice"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	keyauth "github.com/iwpnd/fiber-key-auth"
 	"log"
-	"net/http"
-	"os"
 	"sign-builder/core"
 	"sign-builder/handlers"
 )
@@ -15,16 +16,17 @@ func main() {
 	_ = rice.MustFindBox("fonts")
 	_ = rice.MustFindBox("templates")
 
-	listenAddr := ":8080"
-	if val, ok := os.LookupEnv("FUNCTIONS_CUSTOMHANDLER_PORT"); ok {
-		listenAddr = ":" + val
-	}
+	app := fiber.New()
 
-	mux := http.NewServeMux()
+	//Logging
+	app.Use(logger.New())
 
-	mux.HandleFunc("/api/saveshield", handlers.HandleShieldPostQuery)
-	mux.HandleFunc("/api/getshield", handlers.HandleShieldQuery)
+	// Called through Hasura
+	api := app.Group("/api", keyauth.New())
+	api.Get("/getshield", handlers.HandleShieldQuery)
+	api.Post("/saveshield", handlers.HandleShieldPostQuery)
 
-	log.Printf("About to listen on %s. Go to https://127.0.0.1%s/", listenAddr, listenAddr)
-	log.Fatal(http.ListenAndServe(listenAddr, mux))
+	app.Get("/health", handlers.HealthHandler)
+
+	log.Fatal(app.Listen(":3000"))
 }

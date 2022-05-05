@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"fmt"
 	"github.com/disintegration/imaging"
+	"github.com/gofiber/fiber/v2"
 	"net/http"
 	"os"
 	"path"
@@ -12,21 +12,19 @@ import (
 var largeHeight = 50
 var smallHeight = 20
 
-func HandleShieldPostQuery(w http.ResponseWriter, r *http.Request) {
-	params := r.URL.Query()
-	patterns, ok := params["shield"]
-	if !ok || len(patterns) == 0 {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintf(w, "Count Not Find Parameter Shield")
-		return
+func HandleShieldPostQuery(c *fiber.Ctx) error {
+	pattern := c.Query("shield")
+	if len(pattern) == 0 {
+		c.Status(http.StatusBadRequest)
+		c.WriteString("Count Not Find Parameter Shield")
+		return nil
 	}
 
-	pattern := patterns[0]
 	img, err := core.Build(pattern)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintf(w, err.Error())
-		return
+		c.Status(http.StatusBadRequest)
+		c.WriteString("Count Not Build Shield")
+		return err
 	}
 
 	smallImage := imaging.Resize(*img, 0, smallHeight, imaging.Linear)
@@ -34,16 +32,16 @@ func HandleShieldPostQuery(w http.ResponseWriter, r *http.Request) {
 	smallKey := path.Join("Shields", "20x", pattern+".png")
 	err = imaging.Save(smallImage, smallFileName)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintf(w, err.Error())
-		return
+		c.Status(http.StatusBadRequest)
+		c.WriteString("Count Not Save Shield")
+		return err
 	}
 
 	err = core.UploadS3(smallKey, smallFileName)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintf(w, err.Error())
-		return
+		c.Status(http.StatusBadRequest)
+		c.WriteString("Count Not Upload Shield")
+		return err
 	}
 
 	largeImage := imaging.Resize(*img, 0, largeHeight, imaging.Linear)
@@ -51,16 +49,17 @@ func HandleShieldPostQuery(w http.ResponseWriter, r *http.Request) {
 	largeKey := path.Join("Shields", pattern+".png")
 	err = imaging.Save(largeImage, largeFileName)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintf(w, err.Error())
-		return
+		c.Status(http.StatusBadRequest)
+		c.WriteString("Count Not Resize Shield")
+		return err
 	}
 	err = core.UploadS3(largeKey, largeFileName)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		fmt.Fprintf(w, err.Error())
-		return
+		c.Status(http.StatusBadRequest)
+		c.WriteString("Count Not Upload Resized Shield")
+		return err
 	}
 
-	w.WriteHeader(200)
+	c.Status(200)
+	return nil
 }
