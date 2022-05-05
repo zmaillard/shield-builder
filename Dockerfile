@@ -13,7 +13,7 @@ RUN go mod download
 
 COPY . ./
 
-RUN go build -o /main main.go
+RUN go build -ldflags="-s -w"  -o /main main.go rice-box.go
 
 ##
 ## Deploy
