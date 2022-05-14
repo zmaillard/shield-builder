@@ -97,7 +97,8 @@ func main() {
 
 	}
 
-	f, err := os.Create(path.Join(os.TempDir(),  pattern + ".png"))
+	fileName := path.Join("/tmp", pattern+".png")
+	f, err := os.Create(fileName)
 	if err != nil {
 		return
 	}
