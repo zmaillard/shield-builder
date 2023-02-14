@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/GeertJohan/go.rice v1.0.2
-	github.com/aws/aws-sdk-go v1.31.4
+	github.com/aws/aws-sdk-go v1.34.0
 	github.com/caarlos0/env v3.5.0+incompatible
 	github.com/disintegration/imaging v1.6.2
 	github.com/fogleman/gg v1.3.0
