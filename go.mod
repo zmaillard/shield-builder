@@ -13,5 +13,5 @@ require (
 	github.com/iwpnd/fiber-key-auth v0.1.0
 	github.com/joho/godotenv v1.3.0
 	github.com/sirupsen/logrus v1.6.0
-	golang.org/x/image v0.0.0-20200119044424-58c23975cae1
+	golang.org/x/image v0.5.0
 )
